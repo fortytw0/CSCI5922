@@ -343,10 +343,13 @@ for train_bifurcation in train_dataset.keys() :
 
 
                 log_file.write(log)
-                log_file.flush()
-                log_file.close()
-
+                
                 log = "\n"
+            
+            log_file.flush()
+            log_file.close()
+
+                
 
 
 # ### Questions to ask : 

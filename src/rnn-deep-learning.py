@@ -299,6 +299,8 @@ for train_bifurcation in train_dataset.keys() :
                 model_name = 'bi-{}_{}_sentence_dataset'.format(recursion_layer, train_bifurcation)
             else : 
                 model_name = '{}_{}_sentence_dataset'.format(recursion_layer, train_bifurcation)
+
+            print("Training model : " , model_name)
               
             log_path = os.path.join(log_dir, model_name+'.txt')
             train_log_path = os.path.join(log_dir, model_name+'.csv')
@@ -314,7 +316,7 @@ for train_bifurcation in train_dataset.keys() :
                             train_dataset[train_bifurcation]['Y'], 
                             batch_size=128, 
                             callbacks=[early_stopping], 
-                            epochs=50)
+                            epochs=20)
 
             total_time = time.time() - start_time
 
@@ -328,8 +330,10 @@ for train_bifurcation in train_dataset.keys() :
 
             for test_bifurcation in test_dataset.keys() : 
 
+                print("Testing model : {} on {} sentences..." , model_name)
+
                 log += "Validating on {} sentences ".format(test_bifurcation)
-                log += "loss\tTP\tTN\tFP\tFN\n"
+                log += "\nloss\tTP\tTN\tFP\tFN\n"
 
                 results = model.evaluate(test_dataset[test_bifurcation]['X'], 
                                          test_dataset[test_bifurcation]['Y'],
